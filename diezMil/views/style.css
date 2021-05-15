@@ -1,30 +1,42 @@
 .table-view .corner {
     -fx-background-color: transparent;
 }
+
 .table-view .column-header {
     -fx-background-color: transparent;
 }
+
 #tablePointsColunm{
     /* -fx-width: 183.8px;
     -fx-height: 46.75px; */
     -fx-background-color: #C4C4C4;
     -fx-border-radius: 10px;
 }
+
 #tableRoundsColunm{
     /* -fx-width: 44.11px;
     -fx-height: 46.75px; */
     -fx-background-color: #C4C4C4;
 }
+
 #rollDiceButton{
-    -fx-padding: 5 22 5 22;   
+    -fx-padding: 25 15 25 15;  
     -fx-background-color: #333333;
-    -fx-border-radius: 20;
-    -fx-background-radius: 20;
-    -fx-effect: dropshadow( one-pass-box , black , 5 , 0.0 , 2 , 0 );
+    -fx-border-radius: 100;
+    -fx-background-radius: 100;
+    -fx-effect: dropshadow( one-pass-box , gray , 5 , 0.0 , 2 , 0 );
     -fx-text-fill: white;
     -fx-border-radius: 20px;
-    
+}
 
+#skipBtn{
+    -fx-padding: 5 22 5 22;   
+    -fx-background-color: white;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow( one-pass-box , gray , 5 , 0.0 , 2 , 0 );
+    -fx-text-fill: black;
+    -fx-border-radius: 20px;
 }
 
 #currentPoints {
@@ -39,7 +51,6 @@
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
-
 #rollDiceButton:hover {
     -fx-background-color: #3a3a3a;
     -fx-text-fill:white;
@@ -48,4 +59,47 @@
 #rollDiceButton:pressed, #rollDiceButton:default:hover:pressed {
   -fx-background-color: white;
   -fx-text-fill:black;
+}
+
+#btnMute{  
+    -fx-padding: 0 60 45 0;  
+    -fx-background-color: #333333;
+    -fx-border-radius: 100;
+    -fx-background-radius: 100;
+    -fx-text-fill: white;
+    -fx-border-radius: 20px;
+}
+
+#btnShowTable{
+    -fx-padding: 0 60 45 0;  
+    -fx-background-color: white;
+    -fx-border-radius: 100;
+    -fx-background-radius: 100;
+    -fx-text-fill: white;
+    -fx-border-radius: 20px;
+    
+}
+
+/* C4C4C4 */
+
+#centro{
+    -fx-background-color: #C4C4C4;
+}
+
+#derecha{
+    -fx-background-color: #F2C94C;
+    
+}
+
+#izquierda{
+    -fx-background-color: #F2C94C;
+}
+
+#tableRounds{
+    -fx-background-color: #F2C94C;
+}
+
+.table-view .column-header
+{
+    -fx-background-color: #F2C94C;
 }

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -17,50 +21,146 @@
    <children>
       <HBox prefHeight="720.0" prefWidth="1280.0">
          <children>
-            <VBox fx:id="izquierda" prefHeight="720.0" prefWidth="450.0">
+            <VBox fx:id="izquierda" alignment="CENTER" prefHeight="720.0" prefWidth="450.0">
                <children>
                   <Pane fx:id="izquierda" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Text fx:id="PlayerName" layoutX="106.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <Text fx:id="PlayerName" layoutX="76.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Laura">
                            <font>
-                              <Font size="24.0" />
+                              <Font name="Bauhaus 93" size="48.0" />
                            </font>
                         </Text>
-                        <Text fx:id="PlayerPoints" layoutX="106.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5000">
+                        <Text fx:id="PlayerPoints" layoutX="78.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5000">
                            <font>
-                              <Font size="24.0" />
+                              <Font name="Bauhaus 93" size="48.0" />
                            </font>
                         </Text>
                      </children>
                   </Pane>
-                  <TableView fx:id="tableRounds" fixedCellSize="2.0" prefHeight="523.0" prefWidth="277.0">
+                  <TableView fx:id="tableRounds" fixedCellSize="2.0" prefHeight="446.0" prefWidth="277.0">
                     <columns>
                       <TableColumn fx:id="tableRoundsColunm" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" resizable="false" styleClass="style.css" />
                       <TableColumn fx:id="tablePointsColunm" maxWidth="201.0" minWidth="191.0" prefWidth="191.0" resizable="false" styleClass="style.css" />
                     </columns>
                   </TableView>
+                  <Text fx:id="TotalPlayerPoints" strokeType="OUTSIDE" strokeWidth="0.0" text="5000">
+                     <font>
+                        <Font name="Bauhaus 93" size="64.0" />
+                     </font>
+                  </Text>
                </children>
             </VBox>
-            <VBox fx:id="centro" prefHeight="720.0" prefWidth="900.0">
+            <VBox fx:id="centro" alignment="BOTTOM_CENTER" prefHeight="720.0" prefWidth="900.0">
                <children>
-                  <Pane fx:id="centro" prefHeight="85.0" prefWidth="727.0">
+                  <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button alignment="TOP_RIGHT" layoutX="510.0" layoutY="29.0" mnemonicParsing="false" text="tabla" />
-                        <Button alignment="TOP_RIGHT" layoutX="626.0" layoutY="29.0" mnemonicParsing="false" text="mute" />
+                        <Button fx:id="btnShowTable" alignment="TOP_RIGHT" mnemonicParsing="false">
+                           <HBox.margin>
+                              <Insets right="30.0" top="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnMute" alignment="TOP_RIGHT" mnemonicParsing="false">
+                           <padding>
+                              <Insets right="60.0" top="60.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets right="30.0" top="20.0" />
+                           </HBox.margin>
+                        </Button>
                      </children>
-                  </Pane>
-                  <Pane fx:id="centro" prefHeight="648.0" prefWidth="727.0">
+                     <VBox.margin>
+                        <Insets bottom="220.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="727.0">
                      <children>
-                        <Button fx:id="rollDiceButton" alignment="TOP_RIGHT" layoutX="321.0" layoutY="539.0" mnemonicParsing="false" onAction="#rollDiceClick" styleClass="style.css" text="Roll Dice" />
-                        <TextField fx:id="currentPoints" layoutX="308.0" layoutY="486.0" prefHeight="25.0" prefWidth="117.0" />
-                        <TextArea fx:id="visorDados" layoutX="88.0" layoutY="93.0" prefHeight="200.0" prefWidth="516.0" />
+                        <ImageView fx:id="die1" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../images/die1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="die2" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../images/die2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="die3" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../images/die3.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="die4" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../images/die4.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="die5" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../images/die5.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="die6" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../images/die6.png" />
+                           </image>
+                        </ImageView>
                      </children>
-                  </Pane>
-               </children></VBox>
-            <VBox prefHeight="720.0" prefWidth="450.0">
-               <children>
-                  <ImageView fx:id="derecha" fitHeight="695.0" fitWidth="276.0" pickOnBounds="true" preserveRatio="true" />
-               </children></VBox>
+                     <VBox.margin>
+                        <Insets bottom="100.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TextField fx:id="currentPoints" prefHeight="25.0" prefWidth="117.0">
+                           <VBox.margin>
+                              <Insets bottom="55.0" left="300.0" right="300.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <GridPane alignment="CENTER">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="318.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.0" minWidth="0.0" prefWidth="114.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="485.0" minWidth="10.0" prefWidth="318.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button fx:id="rollDiceButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#rollDiceClick" styleClass="style.css" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                 <graphic>
+                                    <Text fill="WHITE" smooth="false" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.5" text="ROLL">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Text>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="skipBtn" mnemonicParsing="false" text="Skip" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox fx:id="derecha" prefHeight="720.0" prefWidth="450.0" />
          </children>
       </HBox>
    </children>
