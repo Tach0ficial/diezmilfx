@@ -1,0 +1,51 @@
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+#tablePointsColunm{
+    /* -fx-width: 183.8px;
+    -fx-height: 46.75px; */
+    -fx-background-color: #C4C4C4;
+    -fx-border-radius: 10px;
+}
+#tableRoundsColunm{
+    /* -fx-width: 44.11px;
+    -fx-height: 46.75px; */
+    -fx-background-color: #C4C4C4;
+}
+#rollDiceButton{
+    -fx-padding: 5 22 5 22;   
+    -fx-background-color: #333333;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow( one-pass-box , black , 5 , 0.0 , 2 , 0 );
+    -fx-text-fill: white;
+    -fx-border-radius: 20px;
+    
+
+}
+
+#currentPoints {
+    -fx-padding: 5;   
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-background-color: #F2C94C;
+    -fx-font-size: 11pt;
+    -fx-text-fill:black;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+
+#rollDiceButton:hover {
+    -fx-background-color: #3a3a3a;
+    -fx-text-fill:white;
+}
+
+#rollDiceButton:pressed, #rollDiceButton:default:hover:pressed {
+  -fx-background-color: white;
+  -fx-text-fill:black;
+}
