@@ -3,25 +3,29 @@ package diezMil;
 
 import javafx.util.Duration;
 import java.util.ArrayList;
-import java.util.Iterator;
 import diezMil.game.Game;
 import diezMil.game.Player;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
-import javafx.animation.SequentialTransition;
-import javafx.animation.Transition;
 import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class GameController {
 
@@ -96,10 +100,12 @@ public class GameController {
   @FXML
   private Button skipBtn;
 
-
+  @FXML
+  private GridPane grid;
 
   @FXML
   private void initialize() {
+    skipBtn.setVisible(false);
 
     diceImage[0] = die1;
     diceImage[1] = die2;
@@ -147,14 +153,13 @@ public class GameController {
     trans.play();
     System.out.println("Ronda: " + game.getRound());
     System.out.println(getCurrentPlayer().getName());
-    System.out.println("Puntos: " + getCurrentPlayer().getRoundPoints().get(game.getRound() - 1));
     game.getDiceCup().printDice();
     int countedPoints = game.getDiceCup().countPoints();
     currentPoints.setText(countedPoints + "");
     if (countedPoints == 0) {
       getCurrentPlayer().getRoundPoints().set(game.getRound() - 1, 0);
       showRoundPoints();
-      // Thread.sleep(3000);
+      PlayerPoints.setText("0");
       nextPlayer();
     } else {
       addPoints(countedPoints);
@@ -172,20 +177,21 @@ public class GameController {
           System.out.println("Todos han perdido.");
         }
       }
+      
 
       if (game.getDiceCup().getDice().size() == game.getDiceCup().diceToRemove()) {
-        // Thread.sleep(3000);
         nextPlayer();
       } else {
-
-        /*
-         * TODO - Preguntar si quiere tirar de nuevo. if() {
-         * 
-         * }else { nextPlayer(); }
-         */
+        skipBtn.setVisible(true);
       }
     }
-    updateTable();
+    System.out.println("Puntos: " + getCurrentPlayer().getRoundPoints().get(game.getRound() - 1));
+  }
+
+  @FXML
+  void skipClick(ActionEvent event) {
+    nextPlayer();
+    skipBtn.setVisible(false);
   }
 
   private void setImageDiceDefault() {
@@ -195,16 +201,30 @@ public class GameController {
   }
 
   private void updateTable() {
-    // TODO Actualizar la tabla de la izquierda.
-
+    grid.getChildren().clear();
+    int round = 1;
+    for (int point : getCurrentPlayer().getRoundPoints()) {
+      HBox HBoxRound = new HBox(new Label(round + ""));
+      HBox HBoxPoints = new HBox(new Label(point + ""));
+      HBoxRound.setStyle("-fx-background-color: #C4C4C4; -fx-background-radius: 20; ");
+      HBoxRound.setAlignment(Pos.CENTER);
+      HBoxRound.setMaxHeight(30);
+      HBoxPoints.setStyle("-fx-background-color: #C4C4C4; -fx-background-radius: 20;");
+      HBoxPoints.setAlignment(Pos.CENTER);
+      HBoxPoints.setMaxHeight(30);
+      HBoxPoints.setMaxWidth(100);
+      grid.addRow(round - 1, HBoxRound, new Label(""), HBoxPoints);
+      round++;
+    }
   }
 
   private void showRoundPoints() {
     PlayerPoints.setText(getCurrentPlayer().getRoundPoints().get(game.getRound() - 1) + "");
+    TotalPlayerPoints.setText(getCurrentPlayer().getTotalPoints() + "");
+    updateTable();
   }
 
   private void nextPlayer() {
-
     if (isLastPlayer) {
       currentPlayer = 0;
       game.setRound(game.getRound() + 1);
@@ -212,10 +232,9 @@ public class GameController {
       currentPlayer++;
     }
     getCurrentPlayer().getRoundPoints().add(game.getRound() - 1, 0);
-
     ParallelTransition trans = new ParallelTransition();
-
-    PauseTransition delay = new PauseTransition(Duration.seconds(4));
+    PauseTransition delay = new PauseTransition(Duration.seconds(7));
+    skipBtn.setVisible(false);
     delay.setOnFinished(event1 -> updatePlayer());
     trans.getChildren().add(delay);
     trans.play();
@@ -225,7 +244,10 @@ public class GameController {
     setImageDiceDefault();
     currentPoints.clear();
     PlayerPoints.setText("0");
+    TotalPlayerPoints.setText(getCurrentPlayer().getTotalPoints() + "");
     PlayerName.setText(getCurrentPlayer().getName());
+    grid.getChildren().clear();
+    updateTable();
   }
 
   private Player getCurrentPlayer() {

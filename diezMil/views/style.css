@@ -1,24 +1,3 @@
-.table-view .corner {
-    -fx-background-color: transparent;
-}
-
-.table-view .column-header {
-    -fx-background-color: transparent;
-}
-
-#tablePointsColunm{
-    /* -fx-width: 183.8px;
-    -fx-height: 46.75px; */
-    -fx-background-color: #C4C4C4;
-    -fx-border-radius: 10px;
-}
-
-#tableRoundsColunm{
-    /* -fx-width: 44.11px;
-    -fx-height: 46.75px; */
-    -fx-background-color: #C4C4C4;
-}
-
 #rollDiceButton{
     -fx-padding: 25 15 25 15;  
     -fx-background-color: #333333;
@@ -99,7 +78,18 @@
     -fx-background-color: #F2C94C;
 }
 
-.table-view .column-header
+#grid
 {
     -fx-background-color: #F2C94C;
+}
+#gridPoint{
+    -fx-padding: 5;   
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-background-color: #C4C4C4;
+    -fx-font-size: 11pt;
+    -fx-text-fill:black;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
