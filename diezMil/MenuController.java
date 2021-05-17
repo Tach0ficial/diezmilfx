@@ -1,6 +1,8 @@
 package diezMil;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -43,9 +45,12 @@ public class MenuController {
 
   @FXML
   public void initialize() {
+    
     playerNames = new TextField[] {namePlayerOne, namePlayerTwo, namePlayerThree, namePlayerFour,
         namePlayerFive, namePlayerSix};
-
+    for (TextField textField : playerNames) {
+      addTextLimiter(textField, 10);
+    }
     playButton.disableProperty().bind(Bindings.isEmpty(namePlayerOne.textProperty()));
 
     namePlayerTwo.disableProperty().bind(Bindings.isEmpty(namePlayerOne.textProperty()));
@@ -101,5 +106,17 @@ public class MenuController {
     }
     return players;
   }
+  
+  public static void addTextLimiter(final TextField tf, final int maxLength) {
+    tf.textProperty().addListener(new ChangeListener<String>() {
+        @Override
+        public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+            if (tf.getText().length() > maxLength) {
+                String s = tf.getText().substring(0, maxLength);
+                tf.setText(s);
+            }
+        }
+    });
+}
 
 }

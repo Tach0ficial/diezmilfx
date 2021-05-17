@@ -41,7 +41,7 @@
 }
 
 #btnMute{  
-    -fx-padding: 0 60 45 0;  
+    -fx-padding: 12 10 10 10;  
     -fx-background-color: #333333;
     -fx-border-radius: 100;
     -fx-background-radius: 100;
@@ -50,14 +50,17 @@
 }
 
 #btnShowTable{
-    -fx-padding: 0 60 45 0;  
+    -fx-padding: 12 10 10 10;  
     -fx-background-color: white;
     -fx-border-radius: 100;
     -fx-background-radius: 100;
     -fx-text-fill: white;
     -fx-border-radius: 20px;
-    
 }
+#btnShowTable:pressed{
+    -fx-background-color: gray;
+}
+
 
 /* C4C4C4 */
 
