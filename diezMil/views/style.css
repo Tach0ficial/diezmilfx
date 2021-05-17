@@ -74,13 +74,14 @@
     -fx-background-color: #F2C94C;
 }
 
-#tableRounds{
-    -fx-background-color: #F2C94C;
-}
 
 #grid
 {
     -fx-background-color: #F2C94C;
+}
+
+#gridCentre{
+    -fx-background-color: #C4C4C4;
 }
 #gridPoint{
     -fx-padding: 5;   
@@ -92,4 +93,12 @@
     -fx-font-size: 11pt;
     -fx-text-fill:black;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+#scrollPane{
+    -fx-background-color:transparent;
+}
+
+#scrollPaneCentre{
+    -fx-background-color:transparent;
 }

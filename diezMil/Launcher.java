@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -22,7 +23,7 @@ public class Launcher extends Application {
 
     Scene scene = new Scene(root);
 
-    //stage.getIcons().add(new Image("images/icon.png"));
+    stage.getIcons().add(new Image(getClass().getResourceAsStream("images/icon.png")));
 
     stage.setTitle("10000!");
     stage.setScene(scene);
