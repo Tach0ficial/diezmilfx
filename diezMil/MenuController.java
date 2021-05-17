@@ -1,5 +1,10 @@
 package diezMil;
 
+/**
+ * Controlador del menú
+ * @author Carlos Hidalgo Risco y Laura Hidalgo Rivera
+ */
+
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,9 +21,6 @@ import java.util.ArrayList;
 import diezMil.game.Player;
 import javafx.event.ActionEvent; 
 
-/**
- * Controls the GUI Menu
- */
 public class MenuController {
   private TextField[] playerNames;
 
@@ -48,9 +50,11 @@ public class MenuController {
     
     playerNames = new TextField[] {namePlayerOne, namePlayerTwo, namePlayerThree, namePlayerFour,
         namePlayerFive, namePlayerSix};
+    
     for (TextField textField : playerNames) {
       addTextLimiter(textField, 10);
     }
+    
     playButton.disableProperty().bind(Bindings.isEmpty(namePlayerOne.textProperty()));
 
     namePlayerTwo.disableProperty().bind(Bindings.isEmpty(namePlayerOne.textProperty()));
@@ -77,6 +81,11 @@ public class MenuController {
             .or(Bindings.isEmpty(namePlayerFive.textProperty())));
   }
   
+  /**
+   * Al darle clic a jugar, llama a GameController
+   * @param event
+   * @throws IOException
+   */
   @FXML
   void callGameController(ActionEvent event) throws IOException {
     ArrayList<Player> players = setupPlayers();
@@ -94,7 +103,10 @@ public class MenuController {
     stage.show();
   }
 
-
+  /**
+   * Crea el arraylist de jugadores
+   * @return players
+   */
   private ArrayList<Player> setupPlayers() {
     ArrayList<Player> players = new ArrayList<>();
 
@@ -107,13 +119,18 @@ public class MenuController {
     return players;
   }
   
-  public static void addTextLimiter(final TextField tf, final int maxLength) {
-    tf.textProperty().addListener(new ChangeListener<String>() {
+  /**
+   * Limita el número de caracteres del nombre del jugador
+   * @param playerName
+   * @param maxLength
+   */
+  public static void addTextLimiter(final TextField playerName, final int maxLength) {
+    playerName.textProperty().addListener(new ChangeListener<String>() {
         @Override
         public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
-            if (tf.getText().length() > maxLength) {
-                String s = tf.getText().substring(0, maxLength);
-                tf.setText(s);
+            if (playerName.getText().length() > maxLength) {
+                String s = playerName.getText().substring(0, maxLength);
+                playerName.setText(s);
             }
         }
     });

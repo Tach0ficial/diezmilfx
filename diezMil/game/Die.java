@@ -10,10 +10,17 @@ public class Die {
   private int value;
   private final int SIDES = 6;
 
+  /**
+   * Crea un dado con valor aleatorio
+   */
   public Die() {
     this.throwDie();
   }
 
+  /**
+   * Crea un dado con el valor que se pasa como parámetro
+   * @param value
+   */
   public Die(int value) {
     this.value = value;
   }
@@ -35,7 +42,7 @@ public class Die {
    * Devuelve un array con el dibujo del dado
    * @return String[]
    */
-  public String[] drawDie() {
+  /*public String[] drawDie() {
     switch (this.value) {
       case 1:
         return new String[] {
@@ -89,6 +96,7 @@ public class Die {
         return null;
     }
   }
+  */
 
   @Override
   public int hashCode() {

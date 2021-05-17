@@ -1,8 +1,8 @@
 package diezMil.game;
 
 /**
- * Class DiceCup Representación de cubilete
- * 
+ * Class DiceCup
+ * Representación de cubilete
  * @author Carlos Hidalgo Risco y Laura Hidalgo Rivera
  */
 
@@ -20,14 +20,7 @@ public class DiceCup {
     }
   }
 
-  public void reset() {
-    this.dice.clear();
-    for (int i = 0; i < 6; i++) {
-      this.dice.add(new Die());
-    }
-  }
-
-  public final ArrayList<Die> getDice() {
+  public ArrayList<Die> getDice() {
     return dice;
   }
 
@@ -41,8 +34,9 @@ public class DiceCup {
   }
 
   /**
-   * Imprime los dados en forma de dibujo
+   * Imprime los dados en consola
    */
+  /*
   public void printDice() {
     for (int i = 0; i < 5; i++) {
       for (int j = 0; j < dice.size(); j++) {
@@ -51,6 +45,17 @@ public class DiceCup {
         System.out.print(die[i]);
       }
       System.out.println();
+    }
+  }
+  */
+  
+  /**
+   * Rellena el cubilete con 6 dados
+   */
+  public void reset() {
+    this.dice.clear();
+    for (int i = 0; i < 6; i++) {
+      this.dice.add(new Die());
     }
   }
 
@@ -99,12 +104,10 @@ public class DiceCup {
     return points;
   }
 
+  /**
+   * Borra los dados que puntúan del cubilete
+   */
   public void removeDice() {
-    /*
-     * Este mapa lo utilizamos para relacionar la cantidad de dados de un mismo valor con el
-     * multiplicador de puntos, de manera que: cantidad: 3, 4, 5, 6 multiplicador: 1, 2, 4, 8 Para
-     * el multiplicador: 2^0=1, 2^1=2, 2^2=4, 2^3=8
-     */
 
     if (this.dice.containsAll(new ArrayList<Die>(
         Arrays.asList(new Die(1), new Die(2), new Die(3), new Die(4), new Die(5), new Die(6))))) {
@@ -123,6 +126,10 @@ public class DiceCup {
     }
   }
   
+  /**
+   * Cuenta los dados que hay que borrar del cubilete
+   * @return diceToRemove
+   */
   public int diceToRemove() {
     int diceToRemove = 0;
     if (this.dice.containsAll(new ArrayList<Die>(

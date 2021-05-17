@@ -47,7 +47,7 @@ public class Player {
    * Devuelve si el jugador ha perdido
    */
   public boolean isLoser() {
-    return this.getTotalPoints() > 200;
+    return this.getTotalPoints() > 10000;
   }
 
 }
