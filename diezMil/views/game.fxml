@@ -23,7 +23,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Text fx:id="PlayerName" strokeType="OUTSIDE" strokeWidth="0.0" text="Laura">
+                        <Text fx:id="playerName" strokeType="OUTSIDE" strokeWidth="0.0" text="Laura">
                            <font>
                               <Font name="Bauhaus 93" size="48.0" />
                            </font>
@@ -31,16 +31,16 @@
                               <Insets bottom="30.0" />
                            </VBox.margin>
                         </Text>
-                        <Text fx:id="PlayerPoints" strokeType="OUTSIDE" strokeWidth="0.0" text="5000">
+                        <Text fx:id="playerPoints" strokeType="OUTSIDE" strokeWidth="0.0" text="5000">
                            <font>
                               <Font name="Bauhaus 93" size="48.0" />
                            </font>
                         </Text>
                      </children>
                   </VBox>
-                  <ScrollPane fx:id="scrollPane" prefHeight="402.0" prefWidth="194.0">
+                  <ScrollPane fx:id="scrollPaneLeft" prefHeight="402.0" prefWidth="194.0">
                      <content>
-                        <GridPane fx:id="grid" prefHeight="402.0" prefWidth="230.0" vgap="10.0">
+                        <GridPane fx:id="gridLeft" prefHeight="402.0" prefWidth="230.0" vgap="10.0">
                           <columnConstraints>
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="59.0" />
                             <ColumnConstraints fx:id="gridRound" halignment="CENTER" hgrow="SOMETIMES" maxWidth="119.0" minWidth="0.0" prefWidth="22.0" />
@@ -55,7 +55,7 @@
                         <Insets left="20.0" />
                      </VBox.margin>
                   </ScrollPane>
-                  <Text fx:id="TotalPlayerPoints" strokeType="OUTSIDE" strokeWidth="0.0" text="5000">
+                  <Text fx:id="totalPlayerPoints" strokeType="OUTSIDE" strokeWidth="0.0" text="5000">
                      <font>
                         <Font name="Bauhaus 93" size="64.0" />
                      </font>
@@ -66,7 +66,7 @@
                <children>
                   <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnShowTable" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#btnShowTableAction">
+                        <Button fx:id="showTableButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#showTableButtonAction">
                            <HBox.margin>
                               <Insets right="30.0" top="20.0" />
                            </HBox.margin>
@@ -78,7 +78,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="btnMute" alignment="TOP_RIGHT" mnemonicParsing="false">
+                        <Button fx:id="muteButton" alignment="TOP_RIGHT" mnemonicParsing="false">
                            <padding>
                               <Insets right="60.0" top="60.0" />
                            </padding>
@@ -217,7 +217,7 @@
                                     </Text>
                                  </graphic>
                               </Button>
-                              <Button fx:id="skipBtn" mnemonicParsing="false" onAction="#skipClick" text="Skip" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
+                              <Button fx:id="skipButton" mnemonicParsing="false" onAction="#skipButtonAction" text="Skip" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
                            </children>
                         </GridPane>
                      </children>
