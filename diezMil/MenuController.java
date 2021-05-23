@@ -124,6 +124,7 @@ public class MenuController {
    * @param playerName
    * @param maxLength
    */
+  @SuppressWarnings("exports")
   public static void addTextLimiter(final TextField playerName, final int maxLength) {
     playerName.textProperty().addListener(new ChangeListener<String>() {
         @Override

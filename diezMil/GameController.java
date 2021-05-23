@@ -101,6 +101,9 @@ public class GameController {
 
   @FXML
   private GridPane gridLeft;
+  
+  @FXML
+  private GridPane gridNames;
 
   /**
    * Inicializamos el array de imágenes de los dados
@@ -152,7 +155,7 @@ public class GameController {
 
     int countedPoints = game.getDiceCup().countPoints();
     trans.setOnFinished(event1 -> {
-      if (countedPoints != 0) {
+      if (countedPoints != 0 && game.getDiceCup().getDice().size() != game.getDiceCup().diceToRemove()) {
         rollDiceButton.setDisable(false);
         skipButton.setDisable(false);
       }
@@ -169,14 +172,14 @@ public class GameController {
       addPoints(countedPoints);
       showRoundPoints();
       if (getCurrentPlayer().isWinner()) {
-        showAlert(null, "¡" + getCurrentPlayer().getName() + " has ganado!", AlertType.INFORMATION);
+        showAlert("¡" + getCurrentPlayer().getName() + " has ganado!");
         Platform.exit();
         System.exit(0);
       } else if (getCurrentPlayer().isLoser()) {
-        showAlert(null, "Oh no..." + getCurrentPlayer().getName() + ", has perdido.", AlertType.INFORMATION);
+        showAlert("Oh no..." + getCurrentPlayer().getName() + ", has perdido.");
         nextPlayerDelete();
         if (game.getPlayers().isEmpty()) {
-          showAlert(null, "Todos los jugadores han perdido.", AlertType.INFORMATION);
+          showAlert("Todos los jugadores han perdido.");
           Platform.exit();
           System.exit(0);
         }
@@ -200,8 +203,7 @@ public class GameController {
   }
 
   /**
-   * Muestra o no la tabla de puntuaciones
-   * 
+   * Muestra/oculta o no la tabla de puntuaciones
    * @param event
    */
   @FXML
@@ -218,6 +220,7 @@ public class GameController {
    * @param visible
    */
   private void setTableVisible(boolean visible) {
+    gridNames.setVisible(visible);
     gridTotalPoints.setVisible(visible);
     scrollPaneCentre.setVisible(visible);
     gridCentre.setVisible(visible);
@@ -278,11 +281,18 @@ public class GameController {
     }
 
     // Pone la altura de las filas al mismo tamaño
-    for (int i = 0; i < gridLeft.getRowConstraints().size(); i++) {
-      gridLeft.getRowConstraints().get(i).setMinHeight(30);
-      gridLeft.getRowConstraints().get(i).setPrefHeight(30);
-      gridLeft.getRowConstraints().get(i).setMaxHeight(30);
+    for (int i = 0; i < game.getRound(); i++) {
+      setRowConstraints(gridLeft,i);
     }
+  }
+
+  /**
+   * @param i
+   */
+  public void setRowConstraints(GridPane grid,int i) {
+    grid.getRowConstraints().get(i).setMinHeight(30);
+    grid.getRowConstraints().get(i).setPrefHeight(30);
+    grid.getRowConstraints().get(i).setMaxHeight(30);
   }
 
   /**
@@ -299,14 +309,14 @@ public class GameController {
     // Poner "Ronda" en la posicion 0,0 del grid
     Label label1 = new Label("Round");
     HBox hbox1 = createHbox(style1, label1);
-    gridCentre.add(hbox1, 0, 0);
+    gridNames.add(hbox1, 0, 0);
 
     // Nombre de los jugadores
     for (int i = 0; i < game.getPlayers().size(); i++) {
       Label label = new Label(game.getPlayers().get(i).getName());
       label.setStyle("-fx-text-fill: white;");
       HBox hbox = createHbox(style2, label);
-      gridCentre.add(hbox, i + 1, 0);
+      gridNames.add(hbox, i + 1, 0);
     }
 
     // Nombre de los perdedores
@@ -315,7 +325,7 @@ public class GameController {
       label.setStyle("-fx-text-fill: white;");
       HBox hbox = createHbox(style2, label);
       hbox.setOpacity(0.4);
-      gridCentre.add(hbox, game.getPlayers().size() + i + 1, 0);
+      gridNames.add(hbox, game.getPlayers().size() + i + 1, 0);
 
     }
 
@@ -324,7 +334,7 @@ public class GameController {
       for (int j = 0; j < game.getPlayers().get(i).getRoundPoints().size(); j++) {
         Label label = new Label(game.getPlayers().get(i).getRoundPoints().get(j) + "");
         HBox hbox = createHbox(style1, label);
-        gridCentre.add(hbox, i + 1, j + 1);
+        gridCentre.add(hbox, i +1 , j );
       }
     }
 
@@ -334,7 +344,7 @@ public class GameController {
         Label label = new Label(game.getLosers().get(i).getRoundPoints().get(j) + "");
         HBox hbox = createHbox(style1, label);
         hbox.setOpacity(0.4);
-        gridCentre.add(hbox, game.getPlayers().size() + i + 1, j + 1);
+        gridCentre.add(hbox, game.getPlayers().size() + i , j + 1);
       }
     }
 
@@ -342,14 +352,12 @@ public class GameController {
     for (int i = 0; i < getCurrentPlayer().getRoundPoints().size(); i++) {
       HBox hbox = new HBox(new Label(i + 1 + ""));
       hbox.setAlignment(Pos.CENTER);
-      gridCentre.add(hbox, 0, i + 1);
+      gridCentre.add(hbox, 0, i );
     }
 
     // Pone la altura de las filas al mismo tamaño
-    for (int i = 0; i < gridCentre.getRowConstraints().size(); i++) {
-      gridCentre.getRowConstraints().get(i).setMinHeight(30);
-      gridCentre.getRowConstraints().get(i).setPrefHeight(30);
-      gridCentre.getRowConstraints().get(i).setMaxHeight(30);
+    for (int i = 0; i <  game.getRound(); i++) {
+      setRowConstraints(gridCentre,i);
     }
 
     gridTotalPoints.getChildren().clear();
@@ -485,9 +493,9 @@ public class GameController {
    * @param header
    * @param type
    */
-  private void showAlert(String content, String header, AlertType type) {
-    Alert alert = new Alert(type);
-    alert.setContentText(content);
+  private void showAlert(String header) {
+    Alert alert = new Alert(AlertType.INFORMATION);
+    alert.setContentText(null);
     alert.setHeaderText(header);
     alert.showAndWait();
   }
