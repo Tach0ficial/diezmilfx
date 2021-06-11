@@ -32,6 +32,7 @@ package diezMil.game;
  */
 
 import java.util.ArrayList;
+import com.google.gson.Gson;
 
 public class Game {
   private int round = 1;
@@ -52,10 +53,6 @@ public class Game {
   public boolean isGameOver() {
     return this.players.isEmpty();
   }
-  
-  
-  
-  
 
   public final int getRound() {
     return round;
@@ -89,9 +86,10 @@ public class Game {
     this.diceCup = diceCup;
   }
   
-  
-  
-
-
-  
+  public void borrarPuntos() {
+    for (Player player : players) {
+      player.getRoundPoints().clear();
+    }
+    players.get(0).getRoundPoints().add(0);
+  }
 }

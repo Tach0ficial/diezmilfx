@@ -7,7 +7,14 @@ package diezMil;
  */
 
 import javafx.util.Duration;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import com.google.gson.Gson;
 import diezMil.game.Game;
 import diezMil.game.Player;
 import javafx.fxml.FXML;
@@ -28,6 +35,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -36,13 +46,25 @@ import javafx.event.ActionEvent;
 public class GameController {
 
   private Game game;
+  private ArrayList<Player> prePlayers = new ArrayList<Player>();;
   private int currentPlayer = 0;
   private boolean isLastPlayer = false;
   private ImageView[] diceImage;
 
   @SuppressWarnings("exports")
   public void setGame(ArrayList<Player> players) {
+    this.prePlayers = players;
     this.game = new Game(players);
+    playerName.setText(game.getPlayers().get(0).getName());
+    updatePlayer();
+  }
+  
+  @SuppressWarnings("exports")
+  public void setGame( Game game) {
+    this.prePlayers.addAll(game.getPlayers());
+    this.prePlayers.addAll(game.getLosers());
+    System.out.println(prePlayers);
+    this.game = game;
     playerName.setText(game.getPlayers().get(0).getName());
     updatePlayer();
   }
@@ -119,7 +141,6 @@ public class GameController {
   @FXML
   private void initialize() {
     skipButton.setVisible(false);
-
     diceImage = new ImageView[] {die1, die2, die3, die4, die5, die6};
   }
 
@@ -181,6 +202,7 @@ public class GameController {
       showRoundPoints();
       if (getCurrentPlayer().isWinner()) {
         showAlert("¡" + getCurrentPlayer().getName() + " has ganado!");
+        saveScoreboard();
         Platform.exit();
         System.exit(0);
       } else if (getCurrentPlayer().isLoser()) {
@@ -188,6 +210,7 @@ public class GameController {
         nextPlayerDelete();
         if (game.getPlayers().isEmpty()) {
           showAlert("Todos los jugadores han perdido.");
+          saveScoreboard();
           Platform.exit();
           System.exit(0);
         }
@@ -224,13 +247,42 @@ public class GameController {
   }
   
   @FXML
-  void resetGame(ActionEvent event) {
-
+  void resetGame(ActionEvent event) throws IOException {
+    this.game = new Game(this.prePlayers);
+    this.game.borrarPuntos();
+    currentPlayer = 0;
+    isLastPlayer = false;
+    skipButton.setVisible(false);
+    playerName.setText(game.getPlayers().get(0).getName());
+    updatePlayer();
+    initialize();
+    updateTableCentre();
+    updateTableLeft();
+    showRoundPoints();
+    System.out.println(getCurrentPlayer().getTotalPoints());
   }
   
   @FXML
   void saveGame(ActionEvent event) {
 
+    Stage stage = (Stage) playerName.getScene().getWindow();
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+    fileChooser.getExtensionFilters().addAll(new ExtensionFilter("10000 Files", "*.10000"));
+    fileChooser.setTitle("Escoge el archivo csv.");
+    File selectedFile = fileChooser.showOpenDialog(stage);
+    
+    Gson gson = new Gson();
+
+    try(BufferedWriter bw = new BufferedWriter(new FileWriter(selectedFile))) {
+      gson.toJson(this.game, bw);
+      bw.close();
+      showAlert("La partida se a guardado satisfactoriamente.");
+      Platform.exit();
+      System.exit(0);
+    } catch (IOException e1) {
+      e1.printStackTrace();
+    } 
   }
 
   /**
@@ -320,6 +372,7 @@ public class GameController {
 
     // Restricciones del grid
     resetTable(gridCentre, scrollPaneCentre);
+    gridNames.getChildren().clear();
     
     String style1 = "-fx-background-color: #F2C94C; -fx-background-radius: 20;";
     String style2 = "-fx-background-color: #333333; -fx-background-radius: 20;";
@@ -362,7 +415,7 @@ public class GameController {
         Label label = new Label(game.getLosers().get(i).getRoundPoints().get(j) + "");
         HBox hbox = createHbox(style1, label);
         hbox.setOpacity(0.4);
-        gridCentre.add(hbox, game.getPlayers().size() + i , j + 1);
+        gridCentre.add(hbox, game.getPlayers().size() + i + 1 , j);
       }
     }
 
@@ -397,7 +450,7 @@ public class GameController {
       Label label = new Label(game.getLosers().get(i).getTotalPoints() + "");
       HBox hbox = createHbox(style1, label);
       hbox.setOpacity(0.4);
-      gridTotalPoints.add(hbox2, game.getPlayers().size() + i + 1, 0);
+      gridTotalPoints.add(hbox, game.getPlayers().size() + i + 1, 0);
     }
   }
   
@@ -449,6 +502,11 @@ public class GameController {
   private void nextPlayerDelete() {
     game.getLosers().add(getCurrentPlayer());
     game.getPlayers().remove(getCurrentPlayer());
+    if (isLastPlayer) {
+      currentPlayer = 0;
+      game.setRound(game.getRound() + 1);
+    }
+    
     if (!game.getPlayers().isEmpty()) {
       rollDiceButton.setDisable(true);
       transitionToNextPlayer();
@@ -517,5 +575,18 @@ public class GameController {
     alert.setHeaderText(header);
     alert.showAndWait();
   }
+  
+  private void saveScoreboard() {
+    if(saveHTML.isSelected()) {
+      String scbName="Marcador"+LocalDate.now()+""+LocalDateTime.now().getHour()+"-"
+          +LocalDateTime.now().getMinute()+"-"+LocalDateTime.now().getSecond()+".html";
+          game.getPlayers().addAll(game.getLosers());
+          Scoreboard scoreboard  = new Scoreboard(scbName, game.getPlayers().size(), game.getPlayers(), game.getRound());
+          scoreboard.saveHTML();
+          System.out.println("Gracias por jugar a 10000.");
+          System.out.println("Creado por Carlos Hidalgo Risco y Laura Hidalgo Rivera.");
+    }
+  }
+  
 }
 

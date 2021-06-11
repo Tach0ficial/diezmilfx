@@ -9,6 +9,7 @@ package diezMil.game;
 import java.util.ArrayList;
 
 public class Player {
+  private final int pointsToWin = 10000;
   private String name;
   private ArrayList<Integer> roundPoints = new ArrayList<Integer>();
 
@@ -40,14 +41,21 @@ public class Player {
    * Devuelve si el jugador ha ganado
    */
   public boolean isWinner() {
-    return this.getTotalPoints() == 10000;
+    return this.getTotalPoints() == pointsToWin;
   }
   
   /**
    * Devuelve si el jugador ha perdido
    */
   public boolean isLoser() {
-    return this.getTotalPoints() > 10000;
+    return this.getTotalPoints() > pointsToWin;
   }
 
+  @Override
+  public String toString() {
+    return  name + "," + roundPoints;
+  }
+
+  
+  
 }
