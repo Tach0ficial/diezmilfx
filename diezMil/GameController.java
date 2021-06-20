@@ -34,6 +34,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.Media;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -50,6 +52,8 @@ public class GameController {
   private int currentPlayer = 0;
   private boolean isLastPlayer = false;
   private ImageView[] diceImage;
+  private MediaPlayer reproductor;
+  private boolean musicON = true;
 
   @SuppressWarnings("exports")
   public void setGame(ArrayList<Player> players) {
@@ -106,6 +110,9 @@ public class GameController {
   private TextField currentPoints;
 
   @FXML
+  private ImageView musicIcon;
+  
+  @FXML
   private Button rollDiceButton;
 
   @FXML
@@ -113,7 +120,7 @@ public class GameController {
 
   @FXML
   private GridPane gridTotalPoints;
-
+  
   @FXML
   private Button skipButton;
 
@@ -142,8 +149,28 @@ public class GameController {
   private void initialize() {
     skipButton.setVisible(false);
     diceImage = new ImageView[] {die1, die2, die3, die4, die5, die6};
+    final String MUSIC = "music.mp3";
+    File file = new File(MUSIC);
+    Media audio = new Media(file.toURI().toString());
+    reproductor = new MediaPlayer(audio);
+    reproductor.play();
+    reproductor.setVolume(0.1);
   }
-
+  @FXML
+  private void btnMusic(ActionEvent event) {
+    if(!musicON) {
+      Image img = new Image(getClass().getResourceAsStream("images/unmute.png"));
+      musicIcon.setImage(img);
+      reproductor.play();
+      musicON = true;
+    }else {
+      Image img = new Image(getClass().getResourceAsStream("images/mute.png"));
+      musicIcon.setImage(img);
+      reproductor.pause();
+      musicON = false;
+    }
+  }
+  
   @FXML
   private void rollDiceClick(ActionEvent event) {
 
@@ -248,6 +275,7 @@ public class GameController {
   
   @FXML
   void resetGame(ActionEvent event) throws IOException {
+    reproductor.stop();
     this.game = new Game(this.prePlayers);
     this.game.borrarPuntos();
     currentPlayer = 0;
@@ -277,7 +305,7 @@ public class GameController {
     try(BufferedWriter bw = new BufferedWriter(new FileWriter(selectedFile))) {
       gson.toJson(this.game, bw);
       bw.close();
-      showAlert("La partida se a guardado satisfactoriamente.");
+      showAlert("La partida se ha guardado satisfactoriamente.");
       Platform.exit();
       System.exit(0);
     } catch (IOException e1) {

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="anchor-menu" prefHeight="607.0" prefWidth="864.0" styleClass="styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diezMil.NamesMenuController">
+<AnchorPane id="anchor-menu" prefHeight="607.0" prefWidth="864.0" stylesheets="@namesStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diezMil.NamesMenuController">
     <VBox alignment="CENTER" spacing="15.0" styleClass="styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Label alignment="CENTER" prefHeight="94.0" prefWidth="326.0" text="DIEZMIL">
             <font>
