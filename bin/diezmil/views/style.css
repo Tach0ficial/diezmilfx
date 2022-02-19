@@ -1,0 +1,117 @@
+#rollDiceButton{
+    -fx-padding: 25 15 25 15;  
+    -fx-background-color: #333333;
+    -fx-border-radius: 100;
+    -fx-background-radius: 100;
+    -fx-effect: dropshadow( one-pass-box , gray , 5 , 0.0 , 2 , 0 );
+    -fx-text-fill: white;
+    -fx-border-radius: 20px;
+}
+
+#skipButton{
+    -fx-padding: 5 22 5 22;   
+    -fx-background-color: white;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow( one-pass-box , gray , 5 , 0.0 , 2 , 0 );
+    -fx-text-fill: black;
+    -fx-border-radius: 20px;
+}
+
+#currentPoints {
+    -fx-padding: 5;   
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-background-color: #F2C94C;
+    -fx-font-size: 11pt;
+    -fx-text-fill:black;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+#rollDiceButton:hover {
+    -fx-background-color: #3a3a3a;
+    -fx-text-fill:white;
+}
+
+#rollDiceButton:pressed, #rollDiceButton:default:hover:pressed {
+  -fx-background-color: white;
+  -fx-text-fill:black;
+}
+
+#muteButton{  
+    -fx-padding: 12 10 10 10;  
+    -fx-background-color: #333333;
+    -fx-border-radius: 100;
+    -fx-background-radius: 100;
+    -fx-text-fill: white;
+    -fx-border-radius: 20px;
+}
+
+#showTableButton{
+    -fx-padding: 12 10 10 10;  
+    -fx-background-color: white;
+    -fx-border-radius: 100;
+    -fx-background-radius: 100;
+    -fx-text-fill: white;
+    -fx-border-radius: 20px;
+}
+#showTableButton:pressed{
+    -fx-background-color: gray;
+}
+
+
+/* C4C4C4 */
+
+#centro{
+    -fx-background-color: #C4C4C4;
+}
+
+#derecha{
+    -fx-background-color: #F2C94C;
+    
+}
+
+#izquierda{
+    -fx-background-color: #F2C94C;
+}
+
+
+#gridLeft
+{
+    -fx-background-color: #F2C94C;
+}
+
+#gridCentre{
+    -fx-background-color: #C4C4C4;
+}
+#gridPoint{
+    -fx-padding: 5;   
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-background-color: #C4C4C4;
+    -fx-font-size: 11pt;
+    -fx-text-fill:black;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+#scrollPaneLeft{
+    -fx-background-color:transparent;
+}
+
+#scrollPaneCentre{
+    -fx-background-color:transparent;
+}
+
+#options{
+    -fx-padding: 5 22 5 22;   
+    -fx-background-color: white;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow( one-pass-box , gray , 5 , 0.0 , 2 , 0 );
+    -fx-text-fill: black;
+    -fx-border-radius: 20px;
+}
