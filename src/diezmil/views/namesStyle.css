@@ -1,0 +1,17 @@
+#namePlayerOne, 
+#namePlayerTwo,
+#namePlayerThree,
+#namePlayerFour,
+#namePlayerFive,
+#namePlayerSix{
+    -fx-background-radius: 20;
+    -fx-background-color: gray;
+    -fx-text-fill: white;
+}
+#playButton{
+    -fx-padding: 5 20 5 20;  
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+}
